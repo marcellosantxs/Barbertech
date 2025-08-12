@@ -1,335 +1,185 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Catálogo - Comprar Seguidores, Curtidas e Visualizações</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --accent:#10b981; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
-      --white:#ffffff; --danger:#ef4444;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Serviços - Seguidores, Curtidas e Visualizações</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 0;
     }
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-    body{margin:0;background:linear-gradient(180deg,#071233 0%, #071021 100%);color:var(--white);-webkit-font-smoothing:antialiased}
-    .container{max-width:980px;margin:28px auto;padding:20px}
-    header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:18px}
-    h1{margin:0;font-size:20px}
-    .sub{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr;}.sidebar{order:2}}
-    .card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    .services{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-    .service-btn{padding:10px 12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--white);font-weight:600}
-    .service-btn.active{background:linear-gradient(90deg,rgba(16,185,129,0.14),rgba(16,185,129,0.06));box-shadow:0 6px 16px rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.25)}
-    label{display:block;font-size:13px;margin-top:10px;color:var(--muted)}
-    input[type="text"], input[type="number"]{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:var(--white);margin-top:6px}
-    .row{display:flex;gap:12px}
-    .row .col{flex:1}
-    .price-box{margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:space-between}
-    .big{font-size:20px;font-weight:700}
-    .muted{color:var(--muted);font-size:13px}
-    .btn{display:inline-block;padding:12px 14px;border-radius:12px;background:var(--accent);color:#021018;font-weight:700;border:none;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
-    .copy-btn{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);cursor:pointer}
-    .sidebar .section-title{font-size:14px;margin-bottom:8px;font-weight:700}
-    table{width:100%;border-collapse:collapse;margin-top:8px}
-    th,td{padding:8px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left;font-size:13px}
-    .note{font-size:13px;color:var(--muted);margin-top:10px}
-    .error{color:var(--danger);font-weight:600;margin-top:8px}
-    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
-  </style>
+    header {
+        background: #ff4b5c;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    section {
+        background: #fff;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 800px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    th {
+        background: #ff4b5c;
+        color: white;
+    }
+    input, button {
+        padding: 10px;
+        margin: 5px 0;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+    }
+    button {
+        background: #ff4b5c;
+        color: white;
+        cursor: pointer;
+        border: none;
+    }
+    button:hover {
+        background: #e04352;
+    }
+    .price {
+        font-size: 1.2em;
+        color: #333;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    .pix {
+        background: #fff3cd;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+        text-align: center;
+    }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Catálogo — Comprar Seguidores, Curtidas e Visualizações</h1>
-        <div class="sub">Serviço rápido • Min: 100 • Pagamento via Pix</div>
-      </div>
-      <div class="sub">Atendimento via WhatsApp: <strong>(99) 98488-6431</strong></div>
-    </header>
 
-    <div class="grid">
-      <!-- MAIN -->
-      <div>
-        <div class="card">
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div>
-              <div class="muted">Escolha o serviço</div>
-              <div class="services" id="serviceBtns">
-                <button class="service-btn active" data-service="followers">Seguidores</button>
-                <button class="service-btn" data-service="likes">Curtidas</button>
-                <button class="service-btn" data-service="views">Visualizações</button>
-              </div>
-            </div>
-            <div style="text-align:right">
-              <div class="muted">Chave Pix</div>
-              <div style="font-weight:700">CPF 093.831.713-08</div>
-            </div>
-          </div>
+<header>
+    <h1>Catálogo de Serviços</h1>
+    <p>Seguidores, Curtidas e Visualizações para seu perfil</p>
+</header>
 
-          <label id="linkLabel">Link do perfil (Instagram)</label>
-          <input type="text" id="linkInput" placeholder="https://instagram.com/usuario">
+<section>
+    <h2>Seguidores</h2>
+    <table>
+        <tr><th>Quantidade</th><th>Preço</th></tr>
+        <tr><td>100</td><td>R$ 3,00</td></tr>
+        <tr><td>500</td><td>R$ 15,00</td></tr>
+        <tr><td>1000</td><td>R$ 30,00</td></tr>
+        <tr><td>5000</td><td>R$ 150,00</td></tr>
+    </table>
+    <input type="text" id="linkSeguidores" placeholder="Link do perfil">
+    <input type="number" id="qtdSeguidores" placeholder="Quantidade desejada (mínimo 100)" min="100">
+    <div class="price" id="valorSeguidores">Valor: R$ 0,00</div>
+    <div class="pix">Chave Pix: <b>093.831.713-08</b></div>
+    <button onclick="enviarWhatsApp('seguidores')">Pedir pelo WhatsApp</button>
+</section>
 
-          <div class="row" style="margin-top:10px">
-            <div class="col">
-              <label>Quantidade</label>
-              <input type="number" id="qtyInput" placeholder="Ex: 100, 250, 1000" min="100" value="100">
-            </div>
-            <div style="width:150px">
-              <label>&nbsp;</label>
-              <button class="btn" id="calcBtn" style="width:100%;">Calcular</button>
-            </div>
-          </div>
+<section>
+    <h2>Curtidas</h2>
+    <table>
+        <tr><th>Quantidade</th><th>Preço</th></tr>
+        <tr><td>1000</td><td>R$ 3,00</td></tr>
+        <tr><td>5000</td><td>R$ 15,00</td></tr>
+        <tr><td>10000</td><td>R$ 30,00</td></tr>
+    </table>
+    <input type="text" id="linkCurtidas" placeholder="Link do post">
+    <input type="number" id="qtdCurtidas" placeholder="Quantidade desejada (mínimo 100)" min="100">
+    <div class="price" id="valorCurtidas">Valor: R$ 0,00</div>
+    <div class="pix">Chave Pix: <b>093.831.713-08</b></div>
+    <button onclick="enviarWhatsApp('curtidas')">Pedir pelo WhatsApp</button>
+</section>
 
-          <div class="price-box" style="margin-top:14px">
-            <div>
-              <div class="muted">Valor estimado</div>
-              <div class="big" id="priceDisplay">R$ 1,20</div>
-              <div class="muted" id="priceBreak">Seguidores — R$1,20 a cada 100</div>
-            </div>
-            <div style="text-align:right">
-              <div class="muted">Quantidade mínima</div>
-              <div style="font-weight:700">100</div>
-              <div style="height:6px"></div>
-              <button class="btn" id="whatsBtn">Concluir no WhatsApp</button>
-            </div>
-          </div>
+<section>
+    <h2>Visualizações</h2>
+    <table>
+        <tr><th>Quantidade</th><th>Preço</th></tr>
+        <tr><td>1000</td><td>R$ 3,00</td></tr>
+        <tr><td>5000</td><td>R$ 15,00</td></tr>
+        <tr><td>10000</td><td>R$ 30,00</td></tr>
+    </table>
+    <input type="text" id="linkVisualizacoes" placeholder="Link do vídeo/reels">
+    <input type="number" id="qtdVisualizacoes" placeholder="Quantidade desejada (mínimo 100)" min="100">
+    <div class="price" id="valorVisualizacoes">Valor: R$ 0,00</div>
+    <div class="pix">Chave Pix: <b>093.831.713-08</b></div>
+    <button onclick="enviarWhatsApp('visualizacoes')">Pedir pelo WhatsApp</button>
+</section>
 
-          <div class="note">Ao clicar em "Concluir no WhatsApp", será aberta uma conversa com uma mensagem pronta contendo o serviço, link, quantidade e valor. Após o pagamento, envie o comprovante no chat.</div>
+<script>
+function calcularValores() {
+    let qtdSeg = document.getElementById('qtdSeguidores').value;
+    if (qtdSeg >= 100) {
+        document.getElementById('valorSeguidores').innerText = 
+            "Valor: R$ " + ((qtdSeg / 100) * 3).toFixed(2).replace('.', ',');
+    }
+    let qtdCurt = document.getElementById('qtdCurtidas').value;
+    if (qtdCurt >= 100) {
+        document.getElementById('valorCurtidas').innerText = 
+            "Valor: R$ " + ((qtdCurt / 1000) * 3).toFixed(2).replace('.', ',');
+    }
+    let qtdVis = document.getElementById('qtdVisualizacoes').value;
+    if (qtdVis >= 100) {
+        document.getElementById('valorVisualizacoes').innerText = 
+            "Valor: R$ " + ((qtdVis / 1000) * 3).toFixed(2).replace('.', ',');
+    }
+}
 
-          <div id="errorMsg" class="error" style="display:none"></div>
-        </div>
+document.querySelectorAll('input[type=number]').forEach(input => {
+    input.addEventListener('input', calcularValores);
+});
 
-        <!-- Tables de preços -->
-        <div class="card" style="margin-top:14px">
-          <div style="display:flex;gap:16px;flex-wrap:wrap">
-            <div style="flex:1;min-width:220px">
-              <div class="section-title">Tabela — Seguidores</div>
-              <table>
-                <thead><tr><th>Quantidade</th><th>Preço</th></tr></thead>
-                <tbody>
-                  <tr><td>100</td><td>R$ 1,20</td></tr>
-                  <tr><td>500</td><td>R$ 6,00</td></tr>
-                  <tr><td>1.000</td><td>R$ 12,00</td></tr>
-                  <tr><td>5.000</td><td>R$ 60,00</td></tr>
-                </tbody>
-              </table>
-            </div>
+function enviarWhatsApp(tipo) {
+    let numero = "5599984886431";
+    let link = "";
+    let quantidade = "";
+    let valor = "";
 
-            <div style="flex:1;min-width:220px">
-              <div class="section-title">Tabela — Curtidas</div>
-              <table>
-                <thead><tr><th>Quantidade</th><th>Preço</th></tr></thead>
-                <tbody>
-                  <tr><td>100</td><td>R$ 0,30</td></tr>
-                  <tr><td>1.000</td><td>R$ 3,00</td></tr>
-                  <tr><td>5.000</td><td>R$ 15,00</td></tr>
-                  <tr><td>10.000</td><td>R$ 30,00</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div style="flex:1;min-width:220px">
-              <div class="section-title">Tabela — Visualizações</div>
-              <table>
-                <thead><tr><th>Quantidade</th><th>Preço</th></tr></thead>
-                <tbody>
-                  <tr><td>100</td><td>R$ 0,30</td></tr>
-                  <tr><td>1.000</td><td>R$ 3,00</td></tr>
-                  <tr><td>5.000</td><td>R$ 15,00</td></tr>
-                  <tr><td>10.000</td><td>R$ 30,00</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="note">Preços base: Seguidores R$1,20/100 • Curtidas/Visualizações R$3,00/1000</div>
-        </div>
-      </div>
-
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="card">
-          <div class="section-title">Pix</div>
-          <div style="font-weight:700">CPF: 093.831.713-08</div>
-          <div class="muted" style="margin-top:8px">Copie a chave Pix e realize o pagamento via sua conta bancária ou app.</div>
-          <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
-            <input type="text" id="pixKey" value="093.831.713-08" readonly style="padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);flex:1">
-            <button class="copy-btn" id="copyPix">Copiar</button>
-          </div>
-
-          <div style="margin-top:14px">
-            <div class="section-title">Contato</div>
-            <div class="muted">WhatsApp</div>
-            <div style="font-weight:700;margin-top:6px">(99) 98488-6431</div>
-            <div class="muted" style="margin-top:10px">Após o pagamento, envie o comprovante no chat para confirmação.</div>
-          </div>
-
-          <div style="margin-top:14px">
-            <div class="section-title">Dicas para vender mais</div>
-            <ul style="color:var(--muted);padding-left:18px;margin:8px 0 0 0;line-height:1.5">
-              <li>Mantenha seu perfil público enquanto a entrega estiver em andamento.</li>
-              <li>Envie prints de entrega rápida como prova para futuros clientes.</li>
-              <li>Use nosso link direto do WhatsApp para fechar pedidos mais rápido.</li>
-            </ul>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <footer>Feito para vendas rápidas • Teste em celular para melhor experiência</footer>
-  </div>
-
-  <script>
-    // Configurações iniciais (alterar aqui se quiser)
-    const whatsappNumber = "5599984886431"; // seu WhatsApp com DDI (55)
-    const pixKey = "093.831.713-08";
-
-    // Preços unitários (usar cálculos exatos)
-    // Seguidores: R$1,20 a cada 100 => 1.20 / 100 = 0.012 por seguidor
-    const pricePerFollower = 1.20 / 100; // 0.012
-    // Curtidas / visualizações: R$3,00 a cada 1000 => 3.00 / 1000 = 0.003 por unidade
-    const pricePerLikeOrView = 3.00 / 1000; // 0.003
-
-    // Elementos
-    const serviceBtns = document.getElementById('serviceBtns');
-    const btns = document.querySelectorAll('.service-btn');
-    const linkLabel = document.getElementById('linkLabel');
-    const linkInput = document.getElementById('linkInput');
-    const qtyInput = document.getElementById('qtyInput');
-    const priceDisplay = document.getElementById('priceDisplay');
-    const priceBreak = document.getElementById('priceBreak');
-    const errorMsg = document.getElementById('errorMsg');
-    const whatsBtn = document.getElementById('whatsBtn');
-    const calcBtn = document.getElementById('calcBtn');
-    const copyPix = document.getElementById('copyPix');
-    document.getElementById('pixKey').value = pixKey;
-
-    let selectedService = 'followers';
-
-    // Helpers
-    function formatBRL(value){
-      return value.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+    if (tipo === "seguidores") {
+        link = document.getElementById('linkSeguidores').value;
+        quantidade = document.getElementById('qtdSeguidores').value;
+        valor = ((quantidade / 100) * 3).toFixed(2).replace('.', ',');
+    } else if (tipo === "curtidas") {
+        link = document.getElementById('linkCurtidas').value;
+        quantidade = document.getElementById('qtdCurtidas').value;
+        valor = ((quantidade / 1000) * 3).toFixed(2).replace('.', ',');
+    } else if (tipo === "visualizacoes") {
+        link = document.getElementById('linkVisualizacoes').value;
+        quantidade = document.getElementById('qtdVisualizacoes').value;
+        valor = ((quantidade / 1000) * 3).toFixed(2).replace('.', ',');
     }
 
-    function calculatePrice(service, qty){
-      // ensure qty is number and >= 100
-      qty = Number(qty) || 0;
-      if(qty < 100) return {ok:false, msg:"A quantidade mínima é 100."};
-      let price = 0;
-      if(service === 'followers'){
-        // pricePerFollower = 0.012
-        price = qty * pricePerFollower;
-      } else {
-        // likes or views
-        price = qty * pricePerLikeOrView;
-      }
-      // round to cents
-      price = Math.round(price * 100) / 100;
-      return {ok:true, price};
+    if (!link || quantidade < 100) {
+        alert("Preencha corretamente o link e a quantidade mínima.");
+        return;
     }
 
-    // UI update
-    function updateUI(){
-      const qty = Number(qtyInput.value) || 0;
-      const res = calculatePrice(selectedService, qty);
+    let msg = `Olá! Quero pedir *${tipo}*.\nLink: ${link}\nQuantidade: ${quantidade}\nValor: R$ ${valor}\nPix: 093.831.713-08\nSegue comprovante:`;
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
 
-      if(!res.ok){
-        priceDisplay.textContent = "—";
-        errorMsg.style.display = "block";
-        errorMsg.textContent = res.msg;
-        priceBreak.textContent = "";
-        return;
-      }
-      errorMsg.style.display = "none";
-      priceDisplay.textContent = formatBRL(res.price);
-      if(selectedService === 'followers'){
-        priceBreak.textContent = "Seguidores — R$1,20 a cada 100";
-      } else if(selectedService === 'likes'){
-        priceBreak.textContent = "Curtidas — R$3,00 a cada 1000";
-      } else {
-        priceBreak.textContent = "Visualizações — R$3,00 a cada 1000";
-      }
-    }
-
-    // Service buttons
-    btns.forEach(b=>{
-      b.addEventListener('click', ()=> {
-        btns.forEach(x=>x.classList.remove('active'));
-        b.classList.add('active');
-        selectedService = b.dataset.service;
-        if(selectedService === 'followers'){
-          linkLabel.textContent = "Link do perfil (Instagram)";
-          linkInput.placeholder = "https://instagram.com/usuario";
-          qtyInput.min = 100;
-        } else if(selectedService === 'likes'){
-          linkLabel.textContent = "Link do post (Instagram / Facebook)";
-          linkInput.placeholder = "https://instagram.com/p/xxxxx";
-          qtyInput.min = 100;
-        } else {
-          linkLabel.textContent = "Link do vídeo / reels";
-          linkInput.placeholder = "https://instagram.com/reel/xxxxx";
-          qtyInput.min = 100;
-        }
-        updateUI();
-      });
-    });
-
-    // Calculate button
-    calcBtn.addEventListener('click', (e)=>{ e.preventDefault(); updateUI(); });
-
-    // auto update on qty change
-    qtyInput.addEventListener('input', updateUI);
-    linkInput.addEventListener('input', ()=>{ if(errorMsg.style.display==='block') errorMsg.style.display='none'; });
-
-    // WhatsApp
-    whatsBtn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const link = linkInput.value.trim();
-      const qty = Number(qtyInput.value) || 0;
-      if(!link){
-        errorMsg.style.display = "block"; errorMsg.textContent = "Digite o link do perfil/post/vídeo.";
-        return;
-      }
-      const calc = calculatePrice(selectedService, qty);
-      if(!calc.ok){
-        errorMsg.style.display = "block"; errorMsg.textContent = calc.msg;
-        return;
-      }
-      const price = calc.price;
-      // montar mensagem
-      const serviceLabel = selectedService === 'followers' ? 'SEGUIDORES' : (selectedService === 'likes' ? 'CURTIDAS' : 'VISUALIZAÇÕES');
-      let message = `Olá, tenho interesse em *${serviceLabel}*.%0A`;
-      message += `Link: ${encodeURIComponent(link)}%0A`;
-      message += `Quantidade: ${qty}%0A`;
-      message += `Valor: ${encodeURIComponent(formatBRL(price))}%0A%0A`;
-      message += `Vou pagar via PIX (chave: CPF 093.831.713-08).%0A`;
-      message += `Por favor, me informe os dados para eu efetuar o pagamento e, após enviar o comprovante, confirmar a entrega.`;
-      // abrir WhatsApp
-      const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-      window.open(url, '_blank');
-    });
-
-    // Copy Pix
-    copyPix.addEventListener('click', ()=>{
-      const el = document.getElementById('pixKey');
-      el.select ? el.select() : null;
-      try {
-        navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(el.value) : document.execCommand('copy');
-        copyPix.textContent = "Copiado";
-        setTimeout(()=> copyPix.textContent = "Copiar", 1600);
-      } catch(e){
-        copyPix.textContent = "Erro";
-        setTimeout(()=> copyPix.textContent = "Copiar", 1600);
-      }
-    });
-
-    // init UI
-    updateUI();
-  </script>
 </body>
-            </html>
+</html>
